@@ -24,8 +24,28 @@ function App() {
     return diceArray;
   }
 
+  function freezeDie(id) {
+    setDice(prevState => prevState.map(die => {
+      if (die.id === id) {
+        return {
+          ...die, freeze: !die.freeze
+        }
+      } else {
+        return die
+      }
+    }))
+  }
+
   const diceElements = dice.map((die) => {
-    return <Die key={die.id} currentValue={die.currentValue} />;
+    return (
+      <Die
+        key={die.id}
+        currentValue={die.currentValue}
+        id={die.id}
+        freeze={die.freeze}
+        freezeDie={(id) => freezeDie(id)}
+      />
+    );
   });
 
   return (
@@ -36,9 +56,7 @@ function App() {
           Roll until all dice are the same. Click each die to freeze it at its
           current value between rolls.
         </p>
-        <div className="die-wrapper">
-          {diceElements}
-        </div>
+        <div className="die-wrapper">{diceElements}</div>
         <button className="btn">Roll</button>
       </section>
     </main>
