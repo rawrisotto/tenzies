@@ -1,8 +1,32 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Die from "./components/Die";
 
 function App() {
   const [dice, setDice] = useState(generateInitialDice());
+  const [gameWon, setGameWon] = useState(false);
+
+  useEffect(() => {
+    let allValuesEqual = true;
+    const frozenDice = [];
+
+    for (let die of dice) {
+      die.freeze && frozenDice.push(die);
+    }
+
+    if (frozenDice.length !== 0) {
+      const frozenValue = frozenDice[0].currentValue;
+
+      for (let die of frozenDice) {
+        if (die.currentValue !== frozenValue) {
+          allValuesEqual = false;
+          return;
+        }
+      }
+
+      if (frozenDice.length === 10 && allValuesEqual)
+        setGameWon((prevState) => !prevState);
+    }
+  }, [dice]);
 
   function getRandomValue() {
     return Math.ceil(Math.random() * 6);
@@ -23,40 +47,35 @@ function App() {
   }
 
   function freezeDie(id) {
-    setDice(prevState => prevState.map(die => {
-      if (die.id === id) {
-        return {
-          ...die, freeze: !die.freeze
+    setDice((prevState) =>
+      prevState.map((die) => {
+        if (die.id === id) {
+          const updatedDie = { ...die, freeze: !die.freeze };
+          return updatedDie;
+        } else {
+          return die;
         }
-      } else {
-        return die
-      }
-    }))
+      })
+    );
   }
 
   function rollDie() {
-    setDice(prevState => prevState.map(die => {
-      if (!die.freeze) {
-        return {
-          ...die, currentValue: getRandomValue()
+    setDice((prevState) =>
+      prevState.map((die) => {
+        if (!die.freeze) {
+          return {
+            ...die,
+            currentValue: getRandomValue(),
+          };
+        } else {
+          return die;
         }
-      } else {
-        return die
-      }
-    }))
+      })
+    );
   }
 
   const diceElements = dice.map((die) => {
-    return (
-      // <Die
-      //   key={die.id}
-      //   currentValue={die.currentValue}
-      //   id={die.id}
-      //   freeze={die.freeze}
-      //   freezeDie={(id) => freezeDie(id)}
-      // />
-      <Die key={die.id} die={die} freezeDie={(id) => freezeDie(id)} />
-    );
+    return <Die key={die.id} die={die} freezeDie={(id) => freezeDie(id)} />;
   });
 
   return (
@@ -68,7 +87,15 @@ function App() {
           current value between rolls.
         </p>
         <div className="die-wrapper">{diceElements}</div>
-        <button className="btn" onClick={rollDie}>Roll</button>
+        {gameWon ? (
+          <button className="btn" onClick={() => console.log("RESET")}>
+            Reset Game
+          </button>
+        ) : (
+          <button className="btn" onClick={rollDie}>
+            Roll
+          </button>
+        )}
       </section>
     </main>
   );
