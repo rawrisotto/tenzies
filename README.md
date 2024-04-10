@@ -8,7 +8,7 @@ This is just a small project that I have developed on my road to learning React.
 ![project-successful](./public/assets/project-successful.png)
 
 ## Links
-- Live Site URL: [Netlify]()
+- Live Site URL: [Netlify](https://6616bbfc5292a207ec847965--helpful-mermaid-c9cb59.netlify.app/)
 
 ## Built With
 
