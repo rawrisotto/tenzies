@@ -1,0 +1,77 @@
+@import url(./reset.css);
+
+:root {
+  --clr-primary: #0B2434;
+  --clr-secondary: #FFFFFF;
+  --clr-success: #59E391; 
+  --clr-button: #5035FF;
+
+  --ff-base: "Inter", sans-serif;
+  --fw-400: 400;
+  --fw-600: 600;
+}
+
+/* General Styles */
+body {
+  min-height: 100vh;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--clr-primary);
+  font-family: var(--ff-base);
+}
+
+.btn {
+  font-size: 1.5rem;
+  font-weight: var(--fw-600);
+  padding: 0.25rem 3rem;
+  border-radius: 0.5rem;
+  border: none;
+  background: var(--clr-button);
+  color: var(--clr-secondary);
+  cursor: pointer;
+}
+
+/* Board Styles */
+.board {
+  background: var(--clr-secondary);
+  width: 600px;
+  height: 600px;
+  border-radius: 1rem;
+  text-align: center;
+  padding: 2rem;
+}
+
+.board__title {
+  font-size: 3rem;
+  font-weight: var(--fw-600);
+  margin-bottom: 1rem;
+}
+
+.board__rules {
+  font-size: 1.125rem;
+}
+
+/* Die Styles */
+.die-wrapper {
+  margin: 3rem 0;
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.die {
+  display: grid;
+  align-items: center;
+  box-shadow: 0 0 10px var(--clr-primary);
+  width: 50px;
+  aspect-ratio: 1 / 1;
+  cursor: pointer;
+  border-radius: 0.25rem;
+}
+
+.die__number {
+  font-weight: var(--fw-600);
+}
