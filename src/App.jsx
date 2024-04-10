@@ -88,9 +88,12 @@ function App() {
         </p>
         <div className="die-wrapper">{diceElements}</div>
         {gameWon ? (
-          <button className="btn" onClick={() => console.log("RESET")}>
-            Reset Game
-          </button>
+          <>
+            <p className="board__success">Congratulation!</p>
+            <button className="btn" onClick={() => window.location.reload()}>
+              Reset Game
+            </button>
+          </>
         ) : (
           <button className="btn" onClick={rollDie}>
             Roll
