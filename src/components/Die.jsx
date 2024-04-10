@@ -1,7 +1,7 @@
-const Die = () => {
+const Die = (props) => {
   return (
-    <div className="die">
-      <p className="die__number">1</p>
+    <div className="die freeze">
+      <p className="die__number">{props.currentValue}</p>
     </div>
   )
 }

@@ -72,6 +72,10 @@ body {
   border-radius: 0.25rem;
 }
 
+.freeze {
+  background-color: var(--clr-success);
+}
+
 .die__number {
   font-weight: var(--fw-600);
 }

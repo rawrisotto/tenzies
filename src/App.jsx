@@ -1,27 +1,32 @@
 import { useState } from "react";
-import Die from "./components/Die"
+import Die from "./components/Die";
 
 function App() {
-  const [dice, setDice] = useState(generateInitialDice())
+  const [dice, setDice] = useState(generateInitialDice());
 
+  // This function will be used to get a random value between 1 and 6
   function getRandomValue() {
-    return Math.ceil(Math.random() * 6)
+    return Math.ceil(Math.random() * 6);
   }
 
+  // This function will be used to set the initial state of dice
   function generateInitialDice() {
-    const diceArray = []
-    
+    const diceArray = [];
+
     for (let i = 0; i < 10; i++) {
       diceArray.push({
         id: i + 1,
         currentValue: getRandomValue(),
         freeze: false,
-        roll: getRandomValue
-      })
+      });
     }
 
-    return diceArray
+    return diceArray;
   }
+
+  const diceElements = dice.map((die) => {
+    return <Die key={die.id} currentValue={die.currentValue} />;
+  });
 
   return (
     <main>
@@ -32,16 +37,7 @@ function App() {
           current value between rolls.
         </p>
         <div className="die-wrapper">
-          <Die />
-          <Die />
-          <Die />
-          <Die />
-          <Die />
-          <Die />
-          <Die />
-          <Die />
-          <Die />
-          <Die />
+          {diceElements}
         </div>
         <button className="btn">Roll</button>
       </section>
