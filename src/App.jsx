@@ -48,13 +48,14 @@ function App() {
 
   const diceElements = dice.map((die) => {
     return (
-      <Die
-        key={die.id}
-        currentValue={die.currentValue}
-        id={die.id}
-        freeze={die.freeze}
-        freezeDie={(id) => freezeDie(id)}
-      />
+      // <Die
+      //   key={die.id}
+      //   currentValue={die.currentValue}
+      //   id={die.id}
+      //   freeze={die.freeze}
+      //   freezeDie={(id) => freezeDie(id)}
+      // />
+      <Die key={die.id} die={die} freezeDie={(id) => freezeDie(id)} />
     );
   });
 
