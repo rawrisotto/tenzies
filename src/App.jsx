@@ -4,12 +4,10 @@ import Die from "./components/Die";
 function App() {
   const [dice, setDice] = useState(generateInitialDice());
 
-  // This function will be used to get a random value between 1 and 6
   function getRandomValue() {
     return Math.ceil(Math.random() * 6);
   }
 
-  // This function will be used to set the initial state of dice
   function generateInitialDice() {
     const diceArray = [];
 
@@ -29,6 +27,18 @@ function App() {
       if (die.id === id) {
         return {
           ...die, freeze: !die.freeze
+        }
+      } else {
+        return die
+      }
+    }))
+  }
+
+  function rollDie() {
+    setDice(prevState => prevState.map(die => {
+      if (!die.freeze) {
+        return {
+          ...die, currentValue: getRandomValue()
         }
       } else {
         return die
@@ -57,7 +67,7 @@ function App() {
           current value between rolls.
         </p>
         <div className="die-wrapper">{diceElements}</div>
-        <button className="btn">Roll</button>
+        <button className="btn" onClick={rollDie}>Roll</button>
       </section>
     </main>
   );
